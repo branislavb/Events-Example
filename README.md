@@ -14,6 +14,31 @@ Features include:
 
 This section describes how to install the plugin and get it working.
 
+## Map Domain to localhost / Windows OS
+
+Open file hosts located at C:\Windows\System32\Drivers\etc with administrator privileges and add below line.
+
+	127.0.0.1 local-www.eventlisting.com
+
+Apache’s virtual host feature allows to point custom domains to project inside c:\xampp\htdocs\ folder.
+Open C:\xampp\apache\conf\extra\httpd-vhosts.conf and add below lines.
+
+  NameVirtualHost *
+    <VirtualHost *>
+        DocumentRoot "C:/xampp/htdocs"
+        ServerName localhost
+    </VirtualHost>
+    
+    <VirtualHost *>
+        ServerName local-www.eventlisting.com
+        ServerAlias local-www.eventlisting.com
+        DocumentRoot "C:/xampp/htdocs/example"
+    </VirtualHost>
+    
+If your localhost has setup to listen on any other port, add your port number in tags.
+e.g. <VirtualHost *:80>
+
+Now restart Apache, and once you try and access http://localhost, it should resolve as local-www.eventlisting.com
 
 ### Uploading in WordPress Dashboard
 
